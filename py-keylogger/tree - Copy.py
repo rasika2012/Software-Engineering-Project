@@ -181,4 +181,4 @@ add(root, 0, "oo", '\u0D95', 2)
 add(root, 0, "au", '\u0D96', 2)
 
 # print('\u0D9A\u0DCA')
-find(root, "pakaya")
+find(root, "aaa")
