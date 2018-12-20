@@ -1,24 +1,30 @@
 import pyxhook
 import os
-import tree
-# import unicodeWords
+import treeNew
+import unicodeWords as uni
 
+
+root = data.Tree('*')
+root = uni.add_unicode(root)
 wordList = []
 
 counter = 0
 # fob=open(log_file,'w')
-log_file = '/media/rochana/University/Acadamic/Sem 6/Project/CO328/Software-Engineering-Project-master/py-keylogger/Key.log'       #this should be change according to user preference.
-fob=open(log_file,'w')
+# log_file = '/media/rochana/University/Acadamic/Sem 6/Project/CO328/Software-Engineering-Project-master/py-keylogger/Key.log'       #this should be change according to user preference.
+# fob=open(log_file,'w')
 
 def printWord():
 	global counter
 
-	
-
 	wordList.pop(counter)
 	counter-=1
-	tree.find("".join([str(x) for x in wordList] ))
-	print "".join([str(x) for x in wordList] )
+	to_convert = ''.join(wordList)
+	uni.get_unicode(root,wordList)
+	# treeNew.find(to_convert)
+	
+	# treeNew.find("".join([str(x) for x in wordList] ))
+	print "\n"
+	# print "".join([str(x) for x in wordList] )
 	# word = unicodeWords.identifyWorks(word)
 	# fob.write("".join([str(x) for x in wordList] ))
 	counter =0
@@ -30,10 +36,19 @@ def OnKeyPress(event):
   	
   		
   	if event.Ascii == 8 :
-  		wordList.pop(counter)
+  		if len(wordList)==0:
+  			pass
   		
-  		counter-=1
-  		wordList.pop(counter)
+  		else:
+  			wordList.pop(counter)
+	  		
+	  		if len(wordList)!=0:
+		  			  		
+		  		counter-=1
+	  			wordList.pop(counter)
+		  		
+	  			# wordList.pop(counter)
+  			
 
 	
 	
