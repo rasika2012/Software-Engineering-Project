@@ -1,4 +1,13 @@
-import data_tree as tree
+
+class Tree(object):
+    """docstring for Tree"""
+
+    def __init__(self, letter):
+        # super(Tree, self).__init__()
+        self.letter = letter
+        self.children = []
+        self.unic = ['', '', '']
+        self.s = 0
 
 def get_unicode(root, word):
     un = ""
